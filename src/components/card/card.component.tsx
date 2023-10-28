@@ -1,6 +1,12 @@
 import './card.styles.css';
+import { IMonster } from '../../App';
 
-const Card = ({ monster }) => {
+
+interface ICardProps {
+  monster: IMonster
+}
+
+const Card = ({ monster }: ICardProps ) => {
   const { id, name, email } = monster;
 
   return (

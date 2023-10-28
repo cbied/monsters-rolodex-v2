@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
-import CardList from './components/card-list/card-list.component';
-import SearchBox from './components/search-box/search-box.component';
+import CardList from './components/card-list/card-list.component.tsx';
+import SearchBox from './components/search-box/search-box.component.tsx';
 import './App.css';
+
+export interface IMonster {
+  id: string,
+  name: string,
+  email: string
+}
 
 const App = () => {
   const [searchField, setSearchField] = useState('');
@@ -16,14 +22,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const newFilteredMonsters = monsters.filter((monster) => {
+    const newFilteredMonsters = monsters.filter((monster: IMonster) => {
       return monster.name.toLocaleLowerCase().includes(searchField);
     });
 
     setFilterMonsters(newFilteredMonsters);
   }, [monsters, searchField]);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
